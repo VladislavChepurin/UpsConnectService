@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AwesomeNetwork.Controllers.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UpsConnectService.Models.Users;
@@ -9,10 +10,12 @@ namespace UpsConnectService.Controllers.Account
     [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
+        private readonly ILogger<AdminController> _logger;
         RoleManager<IdentityRole> _roleManager;
         UserManager<User> _userManager;
-        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public AdminController(ILogger<AdminController> logger, RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
+            _logger = logger;
             _roleManager = roleManager;
             _userManager = userManager;
         }
@@ -97,11 +100,10 @@ namespace UpsConnectService.Controllers.Account
                 var addedRoles = roles.Except(userRoles);
                 // получаем роли, которые были удалены
                 var removedRoles = userRoles.Except(roles);
-
                 await _userManager.AddToRolesAsync(user, addedRoles);
-
                 await _userManager.RemoveFromRolesAsync(user, removedRoles);
 
+                _logger.LogInformation($"Изменены права доступа пользователя {user.UserName} ** {user.Email}");
                 return RedirectToAction("UserList");
             }
             return NotFound();
@@ -116,6 +118,7 @@ namespace UpsConnectService.Controllers.Account
             if (user != null)
             {
                 await _userManager.DeleteAsync(user);
+                _logger.LogInformation($"Удален пользователь {user.UserName} ** {user.Email}");
                 return RedirectToAction("UserList");
             }
             return NotFound();

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using UpsConnectService.Data;
 using UpsConnectService.Models.Users;
 using UpsConnectService.ViewModels;
@@ -12,16 +11,14 @@ namespace UpsConnectService.Controllers.Account;
 
 public class AccountController : Controller
 {
-    private readonly IMapper _mapper;
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
     private readonly ApplicationDbContext _context;
 
-    public AccountController(ApplicationDbContext context, UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper)
+    public AccountController(ApplicationDbContext context, UserManager<User> userManager, SignInManager<User> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
-        _mapper = mapper;
         _context = context;
     }
 

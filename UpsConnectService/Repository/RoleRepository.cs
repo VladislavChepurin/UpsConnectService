@@ -7,6 +7,7 @@ namespace UpsConnectService.Repository
 {
     public class RoleRepository : IRoleRepository
     {
+        private readonly ILogger<RoleRepository> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<User> _userManager;
 
@@ -17,8 +18,9 @@ namespace UpsConnectService.Repository
             "Outher"
         };
 
-        public RoleRepository(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public RoleRepository(ILogger<RoleRepository> logger, RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
+            _logger= logger;
             _roleManager = roleManager;
             _userManager = userManager;
         }
@@ -32,7 +34,7 @@ namespace UpsConnectService.Repository
                     IdentityResult result = await _roleManager.CreateAsync(new IdentityRole(role));
                     if (result.Succeeded)
                     {
-                        Console.WriteLine($"Создана роль {role}");
+                        _logger.LogInformation($"Создана роль {role}");
                     }
                 }
             }
@@ -52,58 +54,58 @@ namespace UpsConnectService.Repository
                 case "A9E6FD4D8A7772193EA1C94D11A5AEC8": // Role: Administrator + Operator + User + Outher    
                     if ((await _userManager.AddToRoleAsync(user, roles[0])).Succeeded)
                     {
-                        Console.WriteLine($"Пользователю {user.UserName} присвоена роль {roles[0]}");
+                        _logger.LogInformation($"Пользователю {user.UserName} присвоена роль {roles[0]}");
                     }
 
                     if ((await _userManager.AddToRoleAsync(user, roles[1])).Succeeded)
                     {
-                        Console.WriteLine($"Пользователю {user.UserName} присвоена роль {roles[1]}");
+                        _logger.LogInformation($"Пользователю {user.UserName} присвоена роль {roles[1]}");
                     }
 
                     if ((await _userManager.AddToRoleAsync(user, roles[2])).Succeeded)
                     {
-                        Console.WriteLine($"Пользователю {user.UserName} присвоена роль {roles[2]}");
+                        _logger.LogInformation($"Пользователю {user.UserName} присвоена роль {roles[2]}");
                     }
 
                     if ((await _userManager.AddToRoleAsync(user, roles[3])).Succeeded)
                     {
-                        Console.WriteLine($"Пользователю {user.UserName} присвоена роль {roles[3]}");
+                        _logger.LogInformation($"Пользователю {user.UserName} присвоена роль {roles[3]}");
                     }
                     break;
 
                 case "108550CC9160AB741E3F6CC54E3C2AAF": // Role: Operator + User + Outher
                     if ((await _userManager.AddToRoleAsync(user, roles[1])).Succeeded)
                     {
-                        Console.WriteLine($"Пользователю {user.UserName} присвоена роль {roles[1]}");
+                        _logger.LogInformation($"Пользователю {user.UserName} присвоена роль {roles[1]}");
                     }
 
                     if ((await _userManager.AddToRoleAsync(user, roles[2])).Succeeded)
                     {
-                        Console.WriteLine($"Пользователю {user.UserName} присвоена роль {roles[2]}");
+                        _logger.LogInformation($"Пользователю {user.UserName} присвоена роль {roles[2]}");
                     }
 
                     if ((await _userManager.AddToRoleAsync(user, roles[3])).Succeeded)
                     {
-                        Console.WriteLine($"Пользователю {user.UserName} присвоена роль {roles[3]}");
+                        _logger.LogInformation($"Пользователю {user.UserName} присвоена роль {roles[3]}");
                     }
                     break;
 
                 case "FB297B1F10660C5E0852E2128C809A61": // Role: User + Outher
                     if ((await _userManager.AddToRoleAsync(user, roles[2])).Succeeded)
                     {
-                        Console.WriteLine($"Пользователю {user.UserName} присвоена роль {roles[2]}");
+                        _logger.LogInformation($"Пользователю {user.UserName} присвоена роль {roles[2]}");
                     }
 
                     if ((await _userManager.AddToRoleAsync(user, roles[3])).Succeeded)
                     {
-                        Console.WriteLine($"Пользователю {user.UserName} присвоена роль {roles[3]}");
+                        _logger.LogInformation($"Пользователю {user.UserName} присвоена роль {roles[3]}");
                     }
                     break;
 
                 default:                                 // Role: Outher
                     if ((await _userManager.AddToRoleAsync(user, roles[3])).Succeeded)
                     {
-                        Console.WriteLine($"Пользователю {user.UserName} присвоена роль {roles[3]}");
+                        _logger.LogInformation($"Пользователю {user.UserName} присвоена роль {roles[3]}");
                     }
                     break;
             }
