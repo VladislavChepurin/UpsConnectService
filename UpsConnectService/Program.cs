@@ -5,10 +5,14 @@ using UpsConnectService;
 using UpsConnectService.Data;
 using UpsConnectService.Models.Users;
 using UpsConnectService.Repository;
+using SignalRChat.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
+
+builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
 
 // Add services to the container.
 services.AddControllersWithViews();
@@ -55,5 +59,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
+app.MapHub<DataHub>("/chatHub");
 
 app.Run();
