@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UpsConnectService.Models.Users;
 using UpsConnectService.ViewModels;
+using UpsConnectService.ViewModels.Users;
 
 namespace UpsConnectService.Controllers.Account
 {
@@ -21,10 +22,11 @@ namespace UpsConnectService.Controllers.Account
         }
 
         [Route("Index")]
-        public IActionResult Index() => View(_roleManager.Roles.ToList());
+        public IActionResult Index() => View(   _userManager.Users.ToList());
 
         public IActionResult Create() => View();
 
+        public IActionResult RoleList() => View(_roleManager.Roles.ToList());
 
         [HttpPost]
         public async Task<IActionResult> Create(string name)
@@ -59,8 +61,6 @@ namespace UpsConnectService.Controllers.Account
             return RedirectToAction("Index");
         }
 
-        public IActionResult UserList() => View(_userManager.Users.ToList());
-
         [Route("Edit")]
         [HttpGet]
         public async Task<IActionResult> Edit(string userId)
@@ -72,7 +72,7 @@ namespace UpsConnectService.Controllers.Account
                 // получем список ролей пользователя
                 var userRoles = await _userManager.GetRolesAsync(user);
                 var allRoles = _roleManager.Roles.ToList();
-                ChangeRoleViewModel model = new ChangeRoleViewModel
+                ChangeRoleViewModel model = new()
                 {
                     UserId = user.Id,
                     UserEmail = user.Email,
@@ -104,7 +104,7 @@ namespace UpsConnectService.Controllers.Account
                 await _userManager.RemoveFromRolesAsync(user, removedRoles);
 
                 _logger.LogInformation($"Изменены права доступа пользователя {user.UserName} ** {user.Email}");
-                return RedirectToAction("UserList");
+                return RedirectToAction("Index");
             }
             return NotFound();
         }
@@ -120,6 +120,19 @@ namespace UpsConnectService.Controllers.Account
                 await _userManager.DeleteAsync(user);
                 _logger.LogInformation($"Удален пользователь {user.UserName} ** {user.Email}");
                 return RedirectToAction("UserList");
+            }
+            return NotFound();
+        }
+
+        [Route("UserPage")]
+        [HttpGet]
+        public async Task<IActionResult> UserPage(string userId)
+        {
+            User user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                var model = new UserViewModel(user);
+                return View("~/Views/Account/UserPage.cshtml", model);
             }
             return NotFound();
         }

@@ -1,20 +1,56 @@
-﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+﻿
+@model IEnumerable<UpsConnectService.Models.Users.User>
 
-<h2>Список ролей</h2>
-<table class="table">
-    @foreach (var role in Model)
-    {
+<h2>Список пользователей</h2>
+
+<a asp-action="RoleList">Список ролей</a>
+
+<div class="user-list">
+    <table class="table">
+
         <tr>
-            <td>@role.Name</td>
-            <td>
-                <form asp-action="Delete" asp-route-id="@role.Id" method="post">
-                    <button type="submit" class="btn btn-sm btn-danger">
-                        Удалить
-                    </button>
-                </form>
-            </td>
+            <th>Компания</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Логин</th>
+            <th>Эл. почта</th>
+            <th>Права доступа</th>
+            <th>Редатирование</th>
+            <th>Подробно</th>
+            <th>Удаление</th>
         </tr>
-    }
-</table>
-<a asp-action="Create">Добавить роль</a>
-<a asp-action="UserList">Список пользователей</a>
+
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>
+                    @user.Company
+                </td>
+                <td>
+                    @user.FirstName
+                </td>
+                <td>
+                    @user.LastName
+                </td>
+                <td>
+                    @user.UserName
+                </td>
+                <td>
+                    @user.Email
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary btn-user-width" asp-action="Edit" asp-route-userid="@user.Id">Права доступа</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary btn-user-width" asp-action="Edit" asp-route-userid="@user.Id">Редактировать</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary btn-user-width" asp-action="UserPage" asp-route-userid="@user.Id">Подробно</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary btn-user-width" asp-action="DeleteUser" asp-route-userid="@user.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

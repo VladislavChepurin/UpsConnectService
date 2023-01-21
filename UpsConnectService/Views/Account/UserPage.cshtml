@@ -1,0 +1,24 @@
+﻿@model UpsConnectService.ViewModels.Users.UserViewModel;
+
+@{
+    ViewData["Title"] = "Страница пользователя";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="container">           
+    <hr>
+    <p>Имя: <code>@Model.User.FirstName</code><p />
+    <p>Фамилия: <code>@Model.User.LastName</code><p />
+    <p>Логин: <code>@Model.User.UserName</code><p />
+    <p>Компания: <code>@Model.User.Company</code><p />
+    <p>Email: <code>@Model.User.Email</code><p />
+    <hr>
+
+    <div class="logout-button">
+        <form method="post" asp-controller="Account" asp-action="Edit">
+            <input class="enter_submit" type="submit" value="Редактировать" />
+        </form>
+    </div>
+
+</div>

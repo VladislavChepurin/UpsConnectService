@@ -76,6 +76,18 @@ public class AccountController : Controller
         return RedirectToAction("Index", "Home");
     }
 
+    [Route("UserPage")]
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> UserPage()
+    {
+        var user = User;
+        var result = await _userManager.GetUserAsync(user);
+        var model = new UserViewModel(result);
+        return View("UserPage", model);
+    }
+
+
     [HttpGet]
     [Route("Login")]
     public IActionResult Login()
@@ -87,4 +99,21 @@ public class AccountController : Controller
     {
         return View();
     }
+
+    /// <summary>
+    /// Редактирование пользователя
+    /// </summary>
+    /// <returns></returns>
+    [Authorize]
+    [Route("Edit")]
+    [HttpGet]
+    public async Task<IActionResult> Edit()
+    {
+        var user = User;
+
+        var result = await _userManager.GetUserAsync(user);
+
+        return View("Edit", new UserEditViewModel(result));
+    }
+
 }

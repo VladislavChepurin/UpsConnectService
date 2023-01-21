@@ -17,6 +17,12 @@
         }
 
         <div class="logout-button">
+            <form method="post" asp-controller="Account" asp-action="UserPage">
+                <input class="enter_submit" type="submit" value="Моя страница" />
+            </form>
+        </div>
+
+        <div class="logout-button">
             <form method="post" asp-controller="Account" asp-action="Logout">
                 <input class="enter_submit" type="submit" value="Выход" />
             </form>
