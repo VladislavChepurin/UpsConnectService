@@ -1,11 +1,14 @@
 using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SignalRChat.Hubs;
 using UpsConnectService;
 using UpsConnectService.Data;
+using UpsConnectService.Models.Devices;
 using UpsConnectService.Models.Users;
 using UpsConnectService.Repository;
-using SignalRChat.Hubs;
+using UpsConnectService.Validation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,9 @@ builder.Services.AddSignalR();
 
 // Add services to the container.
 services.AddControllersWithViews();
+
+services.AddValidatorsFromAssemblyContaining<DataDeviceRequestValidator>(); // register validators
+services.AddScoped<IValidator<DataDeviceRequest>, DataDeviceRequestValidator>();
 
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection))
