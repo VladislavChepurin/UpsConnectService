@@ -105,15 +105,15 @@ public class AccountController : Controller
     /// </summary>
     /// <returns></returns>
     [Authorize]
-    [Route("Edit")]
+    [Route("EditUser")]
     [HttpGet]
-    public async Task<IActionResult> Edit()
+    public async Task<IActionResult> EditUser(string userId)
     {
-        var user = User;
-
-        var result = await _userManager.GetUserAsync(user);
-
-        return View("Edit", new UserEditViewModel(result));
+        User user = await _userManager.FindByIdAsync(userId);
+        if (user != null)
+        {    
+            return View("EditUser", new UserEditViewModel(user));
+        }
+        return NotFound();
     }
-
 }

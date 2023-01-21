@@ -15,10 +15,16 @@
     <p>Email: <code>@Model.User.Email</code><p />
     <hr>
 
-    <div class="logout-button">
-        <form method="post" asp-controller="Account" asp-action="Edit">
-            <input class="enter_submit" type="submit" value="Редактировать" />
-        </form>
-    </div>
 
+    <a class="btn btn-sm btn-primary btn-user-width" asp-controller="Account" asp-action="EditUser" asp-route-userid="@Model.User.Id">Редактировать</a>
+
+
+
+   @* <form asp-controller="Account" asp-action="Edit" asp-route-userid="@Model.User.Id" method="get">
+        <button type="submit" class="logout-button btn-user-width">
+            Редактировать
+        </button>
+    </form>
+*@
+         
 </div>
