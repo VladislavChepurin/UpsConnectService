@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UpsConnectService.Data;
 using UpsConnectService.Models.Users;
-using UpsConnectService.ViewModels;
 using UpsConnectService.ViewModels.Users;
 
 namespace UpsConnectService.Controllers.Account;

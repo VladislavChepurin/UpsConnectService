@@ -1,5 +1,6 @@
 ﻿@model UpsConnectService.ViewModels.Users.UserViewModel;
 
+
 @{
     ViewData["Title"] = "Страница пользователя";
 }
@@ -23,7 +24,31 @@
 
     <hr>
     <h4>Привязать устойство</h4>
+
+    <div class="bubble">
+        <form class="frm" method="post" asp-controller="Register" asp-action="Register">
+            <div asp-validation-summary="ModelOnly"></div>
+
+          @*  <div class="mrgn">
+                <input asp-for="Login" class="form-control" />
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+
+            <div class="mrgn">
+                <input asp-for="EmailReg" class="form-control" />
+                <span asp-validation-for="EmailReg" class="text-danger"></span>
+            </div>
+            <div class="center">
+                <input class="enter_submit" type="submit" value="Регистрация" />
+            </div>*@
+
+        </form>
+    </div>/>
+
     <hr>
     <h4>Привязаные устройства</h4>
          
+
+
+
 </div>

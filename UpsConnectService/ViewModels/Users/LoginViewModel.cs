@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UpsConnectService.ViewModels
+namespace UpsConnectService.ViewModels.Users
 {
     public class LoginViewModel
     {

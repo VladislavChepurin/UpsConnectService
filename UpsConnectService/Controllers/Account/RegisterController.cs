@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using UpsConnectService.Controllers;
 using UpsConnectService.Models.Users;
 using UpsConnectService.Repository;
-using UpsConnectService.ViewModels;
+using UpsConnectService.ViewModels.Users;
 
 namespace AwesomeNetwork.Controllers.Account;
 

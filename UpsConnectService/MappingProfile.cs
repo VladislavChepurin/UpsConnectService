@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using UpsConnectService.Models.Users;
-using UpsConnectService.ViewModels;
+using UpsConnectService.ViewModels.Users;
 
 namespace UpsConnectService
 {

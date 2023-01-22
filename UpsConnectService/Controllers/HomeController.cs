@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using UpsConnectService.Models;
-using UpsConnectService.ViewModels;
+using UpsConnectService.ViewModels.Users;
 
 namespace UpsConnectService.Controllers;
 
