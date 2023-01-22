@@ -132,7 +132,7 @@ namespace UpsConnectService.Controllers.Account
             if (user != null)
             {
                 var model = new UserViewModel(user);
-                return View("~/Views/Account/UserPage.cshtml", model);
+                return View("User", model);
             }
             return NotFound();
         }

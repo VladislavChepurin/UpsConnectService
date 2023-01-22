@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UpsConnectService.Data;
@@ -35,7 +34,7 @@ public class AccountController : Controller
         if (ModelState.IsValid)
         {
             var userData = _context.Users.FirstOrDefault(p => p.Email == model.Email);
-            var result = await _signInManager.PasswordSignInAsync(userData?.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(userData?.UserName ?? String.Empty, model.Password, model.RememberMe, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
@@ -76,15 +75,15 @@ public class AccountController : Controller
         return RedirectToAction("Index", "Home");
     }
 
-    [Route("UserPage")]
-    [HttpPost]
     [Authorize]
+    [HttpPost]
+    [Route("UserPage")]  
     public async Task<IActionResult> UserPage()
     {
         var user = User;
         var result = await _userManager.GetUserAsync(user);
         var model = new UserViewModel(result);
-        return View("UserPage", model);
+        return View("User", model);
     }
 
 
@@ -98,22 +97,5 @@ public class AccountController : Controller
     public IActionResult Index()
     {
         return View();
-    }
-
-    /// <summary>
-    /// Редактирование пользователя
-    /// </summary>
-    /// <returns></returns>
-    [Authorize]
-    [Route("EditUser")]
-    [HttpGet]
-    public async Task<IActionResult> EditUser(string userId)
-    {
-        User user = await _userManager.FindByIdAsync(userId);
-        if (user != null)
-        {    
-            return View("EditUser", new UserEditViewModel(user));
-        }
-        return NotFound();
     }
 }
