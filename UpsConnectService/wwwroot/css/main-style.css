@@ -13,6 +13,12 @@
     font-size: 15px;
 }
 
+.left {
+    position: relative;
+    float: left
+}
+
+
 .center {
     text-align: center;
     align-content: center;
