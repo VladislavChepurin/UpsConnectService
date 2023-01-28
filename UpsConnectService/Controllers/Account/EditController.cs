@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using UpsConnectService.Data;
-using UpsConnectService.Models.Users;
-using UpsConnectService.ViewModels.Users;
-using Microsoft.AspNetCore.Authorization;
 using UpsConnectService.Extentions;
+using UpsConnectService.Models.Users;
+using UpsConnectService.ViewModels;
+using UpsConnectService.ViewModels.Users;
 
 namespace UpsConnectService.Controllers.Account
 {
@@ -37,24 +37,26 @@ namespace UpsConnectService.Controllers.Account
         /// <summary>
         /// Обновление пользователя
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="userEdit"></param>
         /// <returns></returns>
         [Authorize]
         [Route("Update")]
         [HttpPost]
-        public async Task<IActionResult> Update(UserEditViewModel model)
+        public async Task<IActionResult> Update(UserEditViewModel userEdit)
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByIdAsync(model.UserId);
-                user.Convert(model);
-
-                var userView = new UserViewModel(user);
-
+                var user = await _userManager.FindByIdAsync(userEdit.UserId);
+                user.Convert(userEdit);     
                 var result = await _userManager.UpdateAsync(user);
+
                 if (result.Succeeded)
                 {
-                    return View("User", userView);
+                    var model = new UserPageViewModel
+                    {
+                        UserViewModel = new UserViewModel(user)
+                    };
+                    return View("User", model);
                 }
                 else
                 {
@@ -64,7 +66,7 @@ namespace UpsConnectService.Controllers.Account
             else
             {
                 ModelState.AddModelError("", "Некорректные данные");
-                return View("EditUser", model);
+                return View("EditUser", userEdit);
             }
         }
     }

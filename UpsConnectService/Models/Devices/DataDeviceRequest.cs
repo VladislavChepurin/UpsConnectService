@@ -10,11 +10,11 @@ namespace UpsConnectService.Models.Devices
         public string? SerialNumber { get; set; }
         public string? NameDevice { get; set; }
         public int StatusCode { get; set; }
-        public float InputVoltage { get; set; }
-        public float OutputVoltage { get; set; }
-        public float InputСurrent { get; set; }
-        public float OutpuCurrent { get; set; }
-        public float BatteryCharge { get; set; }
+        public double InputVoltage { get; set; }
+        public double OutputVoltage { get; set; }
+        public double InputСurrent { get; set; }
+        public double OutputCurrent { get; set; }
+        public double BatteryCharge { get; set; }
         public bool Bypass { get; set; }
         public bool GeneralError { get; set; }
         public bool BatteryError { get; set; }

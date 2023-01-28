@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using SignalRChat.Hubs;
 using UpsConnectService;
 using UpsConnectService.Data;
+using UpsConnectService.Data.Repositiry;
+using UpsConnectService.Data.UoW;
+using UpsConnectService.Extentions;
 using UpsConnectService.Models.Devices;
 using UpsConnectService.Models.Users;
 using UpsConnectService.Repository;
@@ -23,8 +26,12 @@ services.AddControllersWithViews();
 services.AddValidatorsFromAssemblyContaining<DataDeviceRequestValidator>(); // register validators
 services.AddScoped<IValidator<DataDeviceRequest>, DataDeviceRequestValidator>();
 
+services.AddTransient<IUnitOfWork, UnitOfWork>();
+
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection))
+    .AddUnitOfWork()
+    .AddCustomRepository<Device, DeviceRepository>()
     .AddIdentity<User, IdentityRole>(opts => {
         opts.Password.RequiredLength = 5;
         opts.Password.RequireNonAlphanumeric = false;

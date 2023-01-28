@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UpsConnectService.Data;
 using UpsConnectService.Models.Users;
+using UpsConnectService.ViewModels;
 using UpsConnectService.ViewModels.Users;
 
 namespace UpsConnectService.Controllers.Account;
@@ -79,12 +80,14 @@ public class AccountController : Controller
     [Route("UserPage")]  
     public async Task<IActionResult> UserPage()
     {
-        var user = User;
-        var result = await _userManager.GetUserAsync(user);
-        var model = new UserViewModel(result);
+        var userClaims = User;
+        var user = await _userManager.GetUserAsync(userClaims);
+        var model =new UserPageViewModel
+        { 
+            UserViewModel = new UserViewModel(user) 
+        };
         return View("User", model);
     }
-
 
     [HttpGet]
     [Route("Login")]

@@ -131,7 +131,10 @@ namespace UpsConnectService.Controllers.Account
             User user = await _userManager.FindByIdAsync(userId);
             if (user != null)
             {
-                var model = new UserViewModel(user);
+                var model = new UserPageViewModel
+                {
+                    UserViewModel = new UserViewModel(user)
+                };
                 return View("User", model);
             }
             return NotFound();

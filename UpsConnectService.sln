@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpsConnectService", "UpsConnectService\UpsConnectService.csproj", "{B23094B3-5DBD-48A6-A7FD-43D0A3AB9A33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpsConnectService.Test", "UpsConnectService.Test\UpsConnectService.Test.csproj", "{D887446F-399B-4AE3-A1EB-B22BB600DF93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpsConnectService.Test", "UpsConnectService.Test\UpsConnectService.Test.csproj", "{D887446F-399B-4AE3-A1EB-B22BB600DF93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicePostServer", "ServicePostServer\ServicePostServer.csproj", "{D1657A2D-C469-41BF-807F-0ABDE35CEA81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D887446F-399B-4AE3-A1EB-B22BB600DF93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D887446F-399B-4AE3-A1EB-B22BB600DF93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D887446F-399B-4AE3-A1EB-B22BB600DF93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1657A2D-C469-41BF-807F-0ABDE35CEA81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1657A2D-C469-41BF-807F-0ABDE35CEA81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1657A2D-C469-41BF-807F-0ABDE35CEA81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1657A2D-C469-41BF-807F-0ABDE35CEA81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

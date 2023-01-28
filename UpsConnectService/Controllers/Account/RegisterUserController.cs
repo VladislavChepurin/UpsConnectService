@@ -1,22 +1,21 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using UpsConnectService.Controllers;
 using UpsConnectService.Models.Users;
 using UpsConnectService.Repository;
 using UpsConnectService.ViewModels.Users;
 
 namespace AwesomeNetwork.Controllers.Account;
 
-public class RegisterController : Controller
+public class RegisterUserController : Controller
 {
-    private readonly ILogger<RegisterController> _logger;
+    private readonly ILogger<RegisterUserController> _logger;
     private readonly IMapper _mapper;
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
     private readonly IRoleRepository _roleRepository;   
 
-    public RegisterController(ILogger<RegisterController> logger, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IRoleRepository roleRepository)
+    public RegisterUserController(ILogger<RegisterUserController> logger, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IRoleRepository roleRepository)
     {
         _logger = logger;
         _mapper = mapper;
