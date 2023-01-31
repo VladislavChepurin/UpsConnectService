@@ -8,8 +8,6 @@
 <h2>@ViewData["Title"]</h2>
 
 
-
-
 <div class="user-container">
     <div class="user-info-left">
         <h4>Данные пользователя</h4>
@@ -31,17 +29,24 @@
 
         <div>
             <form class="frm" method="post" asp-controller="RegisterDevice" asp-action="RegisterNewDevice">
+                <input type="hidden" name="userId" value="@Model.UserViewModel.User.Id" />
                 <div asp-validation-summary="ModelOnly"></div>
+
+                <div class="mrgn">
+                    <input asp-for="RegisterViewsModel.ManufactureCode" class="form-control" />
+                    <span asp-validation-for="RegisterViewsModel.ManufactureCode" class="text-danger"></span>
+                </div>
+
+                <div class="mrgn">
+                    <input asp-for="RegisterViewsModel.NameDevices" class="form-control" />
+                    <span asp-validation-for="RegisterViewsModel.NameDevices" class="text-danger"></span>
+                </div>
 
                 <div class="mrgn">
                     <input asp-for="RegisterViewsModel.SerialNumber" class="form-control" />
                     <span asp-validation-for="RegisterViewsModel.SerialNumber" class="text-danger"></span>
                 </div>
 
-                <div class="mrgn">
-                    <input asp-for="RegisterViewsModel.ManufactureCode" class="form-control" />
-                    <span asp-validation-for="RegisterViewsModel.ManufactureCode" class="text-danger"></span>
-                </div>
                 <div class="center">
                     <input class="enter_submit" type="submit" value="Регистрация" />
                 </div>
@@ -53,13 +58,22 @@
 </div>
 
 
-
     <hr>
     <hr>
 
     <div>
 
         <h4>Привязаные устройства</h4>
+        
+        @foreach (var item in Model.UserViewModel.LinkedDevices)
+        {
+            <div>
+              <p>Название устройства: <code>@item.NameDevice</code><p />
+              <p>Заводской номер: <code>@item.SerialNumber</code><p />
+              <hr>
+        </div>
+
+    }
 
     </div>
 

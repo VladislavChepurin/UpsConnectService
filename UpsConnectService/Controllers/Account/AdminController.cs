@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using UpsConnectService.Data.Repositiry;
+using UpsConnectService.Data.UoW;
+using UpsConnectService.Models.Devices;
 using UpsConnectService.Models.Users;
 using UpsConnectService.ViewModels;
 using UpsConnectService.ViewModels.Users;
@@ -14,11 +17,14 @@ namespace UpsConnectService.Controllers.Account
         private readonly ILogger<AdminController> _logger;
         RoleManager<IdentityRole> _roleManager;
         UserManager<User> _userManager;
-        public AdminController(ILogger<AdminController> logger, RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public AdminController(ILogger<AdminController> logger, RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _roleManager = roleManager;
             _userManager = userManager;
+            _unitOfWork=unitOfWork;
         }
 
         [Route("Index")]
@@ -135,10 +141,11 @@ namespace UpsConnectService.Controllers.Account
                 {
                     UserViewModel = new UserViewModel(user)
                 };
+                model.UserViewModel.LinkedDevices = _unitOfWork.GetAllDevices(user);
                 return View("User", model);
             }
             return NotFound();
-        }
+        }          
     }
 }
 

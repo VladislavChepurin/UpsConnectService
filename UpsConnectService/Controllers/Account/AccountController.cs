@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UpsConnectService.Data;
+using UpsConnectService.Data.UoW;
 using UpsConnectService.Models.Users;
 using UpsConnectService.ViewModels;
 using UpsConnectService.ViewModels.Users;
@@ -13,12 +14,14 @@ public class AccountController : Controller
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
     private readonly ApplicationDbContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AccountController(ApplicationDbContext context, UserManager<User> userManager, SignInManager<User> signInManager)
+    public AccountController(ApplicationDbContext context, UserManager<User> userManager, SignInManager<User> signInManager, IUnitOfWork unitOfWork)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _context = context;
+        _unitOfWork = unitOfWork;
     }
 
     [Authorize]
@@ -63,6 +66,7 @@ public class AccountController : Controller
         var user = User;
         var result = await _userManager.GetUserAsync(user);
         var model = new UserViewModel(result);
+        model.LinkedDevices = _unitOfWork.GetAllDevices(model.User);
         return View("ServiceView", model);
     }
 
@@ -84,8 +88,9 @@ public class AccountController : Controller
         var user = await _userManager.GetUserAsync(userClaims);
         var model =new UserPageViewModel
         { 
-            UserViewModel = new UserViewModel(user) 
+            UserViewModel = new UserViewModel(user)
         };
+        model.UserViewModel.LinkedDevices = _unitOfWork.GetAllDevices(user);
         return View("User", model);
     }
 

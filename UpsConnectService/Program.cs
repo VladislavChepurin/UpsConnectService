@@ -27,6 +27,7 @@ services.AddValidatorsFromAssemblyContaining<DataDeviceRequestValidator>(); // r
 services.AddScoped<IValidator<DataDeviceRequest>, DataDeviceRequestValidator>();
 
 services.AddTransient<IUnitOfWork, UnitOfWork>();
+services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection))

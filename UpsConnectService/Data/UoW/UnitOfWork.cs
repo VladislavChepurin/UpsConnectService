@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 using UpsConnectService.Data.Repositiry;
+using UpsConnectService.Models.Devices;
+using UpsConnectService.Models.Users;
 
 namespace UpsConnectService.Data.UoW;
 
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _appContext;
-
     private Dictionary<Type, object> _repositories;
 
     public UnitOfWork(ApplicationDbContext app)
@@ -44,8 +45,14 @@ public class UnitOfWork : IUnitOfWork
         return (IRepository<TEntity>)_repositories[type];
 
     }
-    public int SaveChanges(bool ensureAutoHistory = false)
+    public void SaveChanges()
     {
-        throw new NotImplementedException();
+        _appContext.SaveChanges();
+    }
+
+    private List<Device> GetAllDevices(User user)
+    {
+        var repository = GetRepository<Device>() as DeviceRepository;
+        return repository.getDeviceByUser(user);
     }
 }
