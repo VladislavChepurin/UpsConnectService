@@ -14,12 +14,27 @@ public class DeviceBaseExRepository : Repository<DeviceBaseExt>
         throw new NotImplementedException();
     }
 
-    public List<DeviceBaseExt> getDeviceTimePeriod(DateTime date1, DateTime date2)
+    public List<DeviceBaseExt> getDeviceAllTimePeriod(DateTime date1, DateTime date2)
     {
         throw new NotImplementedException();
     }
 
-    public List<DeviceBaseExt> getDeviceInHistory()
+    public List<DeviceBaseExt> getDeviceUserTimePeriod(DateTime date1, DateTime date2, User user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<DeviceBaseExt> getDeviceAllHistory()
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<DeviceBaseExt> getDeviceUserFullHistory(User user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<DeviceBaseExt> getDeviceUserLastHistory(User user)
     {
         throw new NotImplementedException();
     }

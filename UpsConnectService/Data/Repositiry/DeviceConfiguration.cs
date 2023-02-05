@@ -8,7 +8,7 @@ namespace UpsConnectService.Data.Repositiry
     {
         public void Configure(EntityTypeBuilder<Device> builder)
         {
-            builder.ToTable("Devices").HasKey(p => p.Id);
+            builder.ToTable("DeviceHistory").HasKey(p => p.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
         }
     }

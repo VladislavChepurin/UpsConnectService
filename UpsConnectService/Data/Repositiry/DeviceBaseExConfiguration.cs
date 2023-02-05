@@ -10,6 +10,6 @@ namespace UpsConnectService.Data.Repositiry
         {
             builder.ToTable("DeviceBase").HasKey(p => p.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
-        }
+        }ghkjln.km
     }
 }
