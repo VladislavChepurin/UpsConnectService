@@ -35,7 +35,10 @@ public class DeviceRepository: Repository<Device>
 
     public void DeleteDevice(User target, string serial)
     {
-
+        var device = Set.AsEnumerable().FirstOrDefault(x => x.User?.Id == target.Id && x.SerialNumber == serial);
+        if (device != null)
+        {
+            Delete(device);
+        }
     }
-
 }

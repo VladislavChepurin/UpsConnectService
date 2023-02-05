@@ -10,30 +10,46 @@
 <p>Страница мониторинга устройств</p>
 <br>
 
-<div class="bubble container">
-   <p>
-       <label>Серийный номер: </label>
-       <label id="serialNumber"/>
-   </p>
-   <p>
-       <label>Название устройства: </label>
-       <label id="nameDevice" />
-   </p>
-    <p>
-        <label>Код статуса: </label>
-        <label id="statusCode" />
-    </p>
-    <p>
-        <label>Входное напряжение: </label>
-        <label id="InputVoltage" />
-    </p>
-    <p>
-        <label>Выходное напряжение: </label>
-        <label id="OutputVoltage" />
-    </p>
 
+<div class="list-device">
+    <h4>Привязаные устройства</h4>
 
+    <table class="table">
+        @if (Model.LinkedDevices != null)
+        {
+            @foreach (var item in Model.LinkedDevices)
+            {
+                <tr>
+
+                    <td>
+                        <label>@Model.Number</label>
+                    </td>
+                    <td id=@item.SerialNumber>
+                        <label>Название устройства: <code>@item.NameDevice</code></label>
+                        <br>
+                        <label>Заводской номер: <code>@item.SerialNumber</code></label>
+                    </td>
+
+                    <td>
+                        <form asp-controller="" asp-action="" method="post">
+
+                          @*  <input type="hidden" name="serialNumber" value="@item.SerialNumber" />
+                            <input type="hidden" name="userId" value="@Model.UserViewModel.User.Id" />*@
+
+                            <button type="submit" class="btn btn-sm enter_submit btn-user-width">
+                                Подробно
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        }       
+        
+       
+    </table>
 </div>
+
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>

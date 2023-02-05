@@ -8,7 +8,7 @@ namespace UpsConnectService.Models.Devices
         public string? UserId { get; set; }
         public User? User { get; set; }
         public string? NameDevice { get; set; }
-        public string? SerialNumber { get; set; }           
+        public string? SerialNumber { get; set; }     
 
     }
 }

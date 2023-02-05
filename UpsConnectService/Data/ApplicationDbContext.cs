@@ -17,7 +17,6 @@ public class ApplicationDbContext : IdentityDbContext<User>
     {
         base.OnModelCreating(builder);
         builder.ApplyConfiguration<Device>(new DeviceConfiguration());
+        builder.ApplyConfiguration<DeviceBaseExt>(new DeviceBaseExConfiguration());
     }
-
-
 }

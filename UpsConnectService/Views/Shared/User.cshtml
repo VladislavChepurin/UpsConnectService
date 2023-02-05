@@ -7,7 +7,6 @@
 
 <h2>@ViewData["Title"]</h2>
 
-
 <div class="user-container">
     <div class="user-info-left">
         <h4>Данные пользователя</h4>
@@ -18,7 +17,7 @@
         <p>Email: <code>@Model.UserViewModel.User.Email</code><p />
 
         <form asp-controller="Edit" asp-action="EditUser" asp-route-userid="@Model.UserViewModel.User.Id" method="post">
-            <button type="submit" class="enter_submit btn-user-width">
+            <button type="submit" class="enter_submit btn-user-width btn-sm">
                 Редактировать
             </button>
         </form>
@@ -48,32 +47,52 @@
                 </div>
 
                 <div class="center">
-                    <input class="enter_submit" type="submit" value="Регистрация" />
+                    <input class="enter_submit btn-sm" type="submit" value="Регистрация" />
                 </div>
 
             </form>
         </div>
     </div>
-
 </div>
 
 
     <hr>
     <hr>
 
-    <div>
-
+    <div class="list-device">
         <h4>Привязаные устройства</h4>
-        
-        @foreach (var item in Model.UserViewModel.LinkedDevices)
-        {
-            <div>
-              <p>Название устройства: <code>@item.NameDevice</code><p />
-              <p>Заводской номер: <code>@item.SerialNumber</code><p />
-              <hr>
-        </div>
 
-    }
+        <table class="table">
+            @foreach (var item in Model.UserViewModel.LinkedDevices)
+            {
+                <tr>
 
+                    <td>
+                        <label>@Model.UserViewModel.Number</label>
+                    </td>
+                    <td>
+                        <label>Название устройства: <code>@item.NameDevice</code></label>
+                        <br>
+                        <label>Заводской номер: <code>@item.SerialNumber</code></label>
+
+                    </td>
+
+                    <td>
+
+
+                    <form asp-controller="RegisterDevice" asp-action="DeleteDevice" method="post">
+
+                        <input type="hidden" name="serialNumber" value="@item.SerialNumber" />
+                        <input type="hidden" name="userId" value="@Model.UserViewModel.User.Id" />
+
+                        <button type="submit" class="btn btn-sm enter_submit btn-user-width">
+                            Удалить устройство
+                        </button>
+                    </form>
+                
+                    </td>
+                </tr>
+            }
+        </table>   
     </div>
 

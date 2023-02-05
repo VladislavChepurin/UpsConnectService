@@ -6,7 +6,8 @@ namespace UpsConnectService.Models.Devices
 
     public class DataDeviceRequest
     {
-       // public Guid Id { get; set; } = Guid.NewGuid();
+        public bool GeneralError { get; set; }
+        public bool BatteryError { get; set; }
         public string? SerialNumber { get; set; }
         public string? NameDevice { get; set; }
         public int StatusCode { get; set; }
@@ -16,7 +17,6 @@ namespace UpsConnectService.Models.Devices
         public double OutputCurrent { get; set; }
         public double BatteryCharge { get; set; }
         public bool Bypass { get; set; }
-        public bool GeneralError { get; set; }
-        public bool BatteryError { get; set; }
+
     }
 }

@@ -33,6 +33,7 @@ string connection = builder.Configuration.GetConnectionString("DefaultConnection
 services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection))
     .AddUnitOfWork()
     .AddCustomRepository<Device, DeviceRepository>()
+    .AddCustomRepository<DeviceBaseExt, DeviceBaseExRepository>()
     .AddIdentity<User, IdentityRole>(opts => {
         opts.Password.RequiredLength = 5;
         opts.Password.RequireNonAlphanumeric = false;

@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UpsConnectService.Data;
+using UpsConnectService.Data.Repositiry;
 using UpsConnectService.Data.UoW;
+using UpsConnectService.Models.Devices;
 using UpsConnectService.Models.Users;
 using UpsConnectService.ViewModels;
 using UpsConnectService.ViewModels.Users;
@@ -66,7 +68,7 @@ public class AccountController : Controller
         var user = User;
         var result = await _userManager.GetUserAsync(user);
         var model = new UserViewModel(result);
-        model.LinkedDevices = _unitOfWork.GetAllDevices(model.User);
+        model.LinkedDevices = GetAllDevices(model.User);
         return View("ServiceView", model);
     }
 
@@ -90,7 +92,7 @@ public class AccountController : Controller
         { 
             UserViewModel = new UserViewModel(user)
         };
-        model.UserViewModel.LinkedDevices = _unitOfWork.GetAllDevices(user);
+        model.UserViewModel.LinkedDevices = GetAllDevices(user);
         return View("User", model);
     }
 
@@ -105,4 +107,11 @@ public class AccountController : Controller
     {
         return View();
     }
+
+    public List<Device> GetAllDevices(User user)
+    {
+        var repository = _unitOfWork.GetRepository<Device>() as DeviceRepository;
+        return repository.getDeviceByUser(user);
+    }
+
 }

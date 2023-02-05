@@ -15,9 +15,9 @@ namespace UpsConnectService.Validation
             RuleFor(x => x.InputСurrent).NotEmpty();
             RuleFor(x => x.OutputCurrent).NotEmpty();
             RuleFor(x => x.BatteryCharge).NotEmpty();
-            RuleFor(x => x.Bypass).NotEmpty();
-            //RuleFor(x => x.GeneralError).NotEmpty();
-            //RuleFor(x => x.BatteryError).NotEmpty();
+            RuleFor(x => x.Bypass).NotNull();
+            RuleFor(x => x.GeneralError).NotNull();
+            RuleFor(x => x.BatteryError).NotNull();
         }
     }
 }

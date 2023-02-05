@@ -10,7 +10,5 @@ namespace UpsConnectService.Data.UoW
 
         void SaveChanges();
         IRepository<TEntity> GetRepository<TEntity>(bool hasCustomRepository = true) where TEntity : class;
-
-        List<Device> GetAllDevices(User user);
     }
 }

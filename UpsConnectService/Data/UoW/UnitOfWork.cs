@@ -8,11 +8,11 @@ namespace UpsConnectService.Data.UoW;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _appContext;
-    private Dictionary<Type, object> _repositories;
+    private Dictionary<Type, object>? _repositories;
 
     public UnitOfWork(ApplicationDbContext app)
     {
-        this._appContext = app;
+        _appContext = app;
     }
 
     public void Dispose()
@@ -48,11 +48,5 @@ public class UnitOfWork : IUnitOfWork
     public void SaveChanges()
     {
         _appContext.SaveChanges();
-    }
-
-    private List<Device> GetAllDevices(User user)
-    {
-        var repository = GetRepository<Device>() as DeviceRepository;
-        return repository.getDeviceByUser(user);
     }
 }
