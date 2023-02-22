@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Service View";
 }
+<link rel="stylesheet" href="~/css/serviceView-style.css" asp-append-version="true" />
 
 <h1>@ViewData["Title"]</h1>
 
@@ -19,15 +20,34 @@
         {
             @foreach (var item in Model.LinkedDevices)
             {
-                <tr>
+                <tr data-more-checker="tr-read-more-@item.SerialNumber">
 
                     <td>
                         <label>@Model.Number</label>
                     </td>
-                    <td id=@item.SerialNumber>
-                        <label>Название устройства: <code>@item.NameDevice</code></label>
-                        <br>
-                        <label>Заводской номер: <code>@item.SerialNumber</code></label>
+
+                    <td>
+                        <label>В сети</label>
+                    </td>
+
+                    <td>
+                        <input type="checkbox" class="read-more-checker" id="read-more-checker-@item.SerialNumber" data-more-checker="read-more-@item.SerialNumber" />
+                        <div class="limiter">
+                            <label>Название устройства: <code>@item.NameDevice</code></label>
+                            <br>
+                            <label>Заводской номер: <code>@item.SerialNumber</code></label>
+                            <br>
+                            <label>Входное напряжение: <label id="@item.SerialNumber-inputVoltage" /></label>
+                            <br>
+                            <label>Выходное напряжение: <label id="@item.SerialNumber-outputVoltage" /></label>
+                            <br>
+                            <label>Выходной ток: <label id="@item.SerialNumber-inputСurrent" /></label>
+                            <br>
+                            <label>Выходной ток: <label id="@item.SerialNumber-outputСurrent" /></label>
+                            <br>
+                            <div class="bottom"></div>
+                        </div>
+                        <label for="read-more-checker-@item.SerialNumber" class="read-more-button"></label>
                     </td>
 
                     <td>

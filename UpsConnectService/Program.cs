@@ -13,6 +13,7 @@ using UpsConnectService.Models.Users;
 using UpsConnectService.Repository;
 using UpsConnectService.Validation;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
@@ -34,7 +35,8 @@ services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn
     .AddUnitOfWork()
     .AddCustomRepository<Device, DeviceRepository>()
     .AddCustomRepository<DeviceBaseExt, DeviceBaseExRepository>()
-    .AddIdentity<User, IdentityRole>(opts => {
+    .AddIdentity<User, IdentityRole>(opts =>
+    {
         opts.Password.RequiredLength = 5;
         opts.Password.RequireNonAlphanumeric = false;
         opts.Password.RequireLowercase = false;
@@ -54,7 +56,14 @@ services.AddScoped<IRoleRepository, RoleRepository>();
 
 //Build services
 var app = builder.Build();
+//--------------------------------------------------
+var webSocketOptions = new WebSocketOptions
+{
+    KeepAliveInterval = TimeSpan.FromMinutes(2)
+};
+app.UseWebSockets(webSocketOptions);
 
+//--------------------------------------------------
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -79,3 +88,9 @@ app.MapRazorPages();
 app.MapHub<DataHub>("/chatHub");
 
 app.Run();
+
+
+
+
+
+

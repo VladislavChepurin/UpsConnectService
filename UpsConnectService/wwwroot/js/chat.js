@@ -4,17 +4,31 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
 
 connection.on("ReceiveMessage", function (request) {
+    
+    var inputVoltage = document.getElementById(request.serialNumber + "-inputVoltage");
+    inputVoltage.textContent = request.inputVoltage + " Вольт";
 
-    var element = document.getElementById(request.serialNumber);
+    var outputVoltage = document.getElementById(request.serialNumber + "-outputVoltage");
+    outputVoltage.textContent = request.outputVoltage + " Вольт";
 
-    //  Make label
-    var label = document.createElement('label');
-    label.textContent = "Марка устойства: " + request.nameDevice;
-    label.setAttribure('id', 'новый_айди');
-    var br = document.createElement('br');
+    var inputСurrent = document.getElementById(request.serialNumber + "-inputСurrent");
+    inputСurrent.textContent = request.inputСurrent + " Ампер";
 
-    element.appendChild(br);
-    element.appendChild(label);
+    var outputСurrent = document.getElementById(request.serialNumber + "-outputСurrent");
+    outputСurrent.textContent = request.outputCurrent + " Ампер";
+
+
+
+    //var element = document.getElementById(request.serialNumber);
+
+    ////  Make label
+    //var label = document.createElement('label');
+    //label.textContent = "Марка устойства: " + request.nameDevice;
+    //label.setAttribure('id', 'новый_айди');
+    //var br = document.createElement('br');
+
+    //element.appendChild(br);
+    //element.appendChild(label);
 });
 
 connection.start().then(function () {

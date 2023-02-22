@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpsConnectService", "UpsCon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpsConnectService.Test", "UpsConnectService.Test\UpsConnectService.Test.csproj", "{D887446F-399B-4AE3-A1EB-B22BB600DF93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicePostServer", "ServicePostServer\ServicePostServer.csproj", "{D1657A2D-C469-41BF-807F-0ABDE35CEA81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientUPS", "ClientUPS\ClientUPS.csproj", "{A6FE2F7B-639E-43F6-A99D-71FEB7D39C56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{D887446F-399B-4AE3-A1EB-B22BB600DF93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D887446F-399B-4AE3-A1EB-B22BB600DF93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D887446F-399B-4AE3-A1EB-B22BB600DF93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1657A2D-C469-41BF-807F-0ABDE35CEA81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1657A2D-C469-41BF-807F-0ABDE35CEA81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1657A2D-C469-41BF-807F-0ABDE35CEA81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1657A2D-C469-41BF-807F-0ABDE35CEA81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6FE2F7B-639E-43F6-A99D-71FEB7D39C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6FE2F7B-639E-43F6-A99D-71FEB7D39C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6FE2F7B-639E-43F6-A99D-71FEB7D39C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6FE2F7B-639E-43F6-A99D-71FEB7D39C56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

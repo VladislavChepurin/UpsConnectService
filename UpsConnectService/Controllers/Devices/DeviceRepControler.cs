@@ -20,6 +20,10 @@ public class DeviceRepControler: Controller
         _logger= logger;
 	}
 
+
+
+
+
     [HttpPost]
     [Route("DeviceServices")]
     public async Task<IActionResult> DataDevice([FromBody] DataDeviceRequest request)
@@ -28,7 +32,7 @@ public class DeviceRepControler: Controller
 
         if (result.IsValid) {
 
-            await _hubContext.Clients.All.SendAsync("ReceiveMessage", request/*.SerialNumber, request.NameDevice, request.StatusCode, request.InputVoltage, request.OutputVoltage*/);
+            await _hubContext.Clients.All.SendAsync("ReceiveMessage", request);
             return StatusCode(200, $"Данные получены");
 
         }
