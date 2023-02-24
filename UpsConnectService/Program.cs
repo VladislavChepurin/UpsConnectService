@@ -33,8 +33,8 @@ services.AddTransient<IUnitOfWork, UnitOfWork>();
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection))
     .AddUnitOfWork()
-    .AddCustomRepository<Device, DeviceRepository>()
-    .AddCustomRepository<DeviceBaseExt, DeviceBaseExRepository>()
+    .AddCustomRepository<DeviceUsers, DeviceUsersRepository>()
+    .AddCustomRepository<DataDeviceRequestExt, DeviceHistoryRepository>()
     .AddIdentity<User, IdentityRole>(opts =>
     {
         opts.Password.RequiredLength = 5;

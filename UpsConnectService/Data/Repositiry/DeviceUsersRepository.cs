@@ -3,9 +3,9 @@ using UpsConnectService.Models.Users;
 
 namespace UpsConnectService.Data.Repositiry;
 
-public class DeviceRepository: Repository<Device>
+public class DeviceUsersRepository: Repository<DeviceUsers>
 {
-    public DeviceRepository(ApplicationDbContext db) : base(db)
+    public DeviceUsersRepository(ApplicationDbContext db) : base(db)
     {
 
     }
@@ -16,7 +16,7 @@ public class DeviceRepository: Repository<Device>
 
         if (device == null)
         {
-            var item = new Device()
+            var item = new DeviceUsers()
             {
                 UserId = target.Id,
                 User = target,
@@ -27,7 +27,7 @@ public class DeviceRepository: Repository<Device>
         }
     }
 
-    public List<Device> getDeviceByUser(User target)
+    public List<DeviceUsers> getDeviceByUser(User target)
     {
         var device = Set.AsEnumerable().Where(x => x?.User?.Id == target.Id);
         return device.ToList();

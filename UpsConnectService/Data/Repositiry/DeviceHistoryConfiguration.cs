@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace UpsConnectService.Data.Repositiry
 {
-    public class DeviceBaseExConfiguration : IEntityTypeConfiguration<DeviceBaseExt>
+    public class DeviceHistoryConfiguration : IEntityTypeConfiguration<DataDeviceRequestExt>
     {
-        public void Configure(EntityTypeBuilder<DeviceBaseExt> builder)
+        public void Configure(EntityTypeBuilder<DataDeviceRequestExt> builder)
         {
-            builder.ToTable("DeviceBase").HasKey(p => p.Id);
+            builder.ToTable("DeviceHistory").HasKey(p => p.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
         }
     }

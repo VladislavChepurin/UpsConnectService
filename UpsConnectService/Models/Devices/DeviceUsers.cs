@@ -2,7 +2,7 @@
 
 namespace UpsConnectService.Models.Devices
 {
-    public class Device
+    public class DeviceUsers
     {
         public int Id { get; set; }
         public string? UserId { get; set; }

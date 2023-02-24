@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 using UpsConnectService.Data.Repositiry;
-using UpsConnectService.Models.Devices;
-using UpsConnectService.Models.Users;
 
 namespace UpsConnectService.Data.UoW;
 

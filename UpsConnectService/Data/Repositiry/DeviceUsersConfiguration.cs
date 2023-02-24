@@ -4,11 +4,11 @@ using UpsConnectService.Models.Devices;
 
 namespace UpsConnectService.Data.Repositiry
 {
-    public class DeviceConfiguration : IEntityTypeConfiguration<Device>
+    public class DeviceUsersConfiguration : IEntityTypeConfiguration<DeviceUsers>
     {
-        public void Configure(EntityTypeBuilder<Device> builder)
+        public void Configure(EntityTypeBuilder<DeviceUsers> builder)
         {
-            builder.ToTable("DeviceHistory").HasKey(p => p.Id);
+            builder.ToTable("DeviceUsers").HasKey(p => p.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
         }
     }

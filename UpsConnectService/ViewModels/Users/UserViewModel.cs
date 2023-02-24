@@ -7,7 +7,7 @@ namespace UpsConnectService.ViewModels.Users
     {
         public User User { get; set; }
 
-        public List<Device>? LinkedDevices { get; set; }
+        public List<DeviceUsers>? LinkedDevices { get; set; }
 
         private int number = default;
         public int Number

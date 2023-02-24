@@ -148,9 +148,9 @@ public class AdminController : Controller
     }
 
 
-    public List<Device> GetAllDevices(User user)
+    public List<DeviceUsers> GetAllDevices(User user)
     {
-        var repository = _unitOfWork.GetRepository<Device>() as DeviceRepository;
+        var repository = _unitOfWork.GetRepository<DeviceUsers>() as DeviceUsersRepository;
         return repository.getDeviceByUser(user);
     }
 }

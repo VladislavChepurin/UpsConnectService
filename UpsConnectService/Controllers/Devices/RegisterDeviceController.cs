@@ -30,7 +30,7 @@ namespace UpsConnectService.Controllers.Devices
 
             if (ModelState.IsValid)
             {
-                var repository = _unitOfWork.GetRepository<Device>() as DeviceRepository;
+                var repository = _unitOfWork.GetRepository<DeviceUsers>() as DeviceUsersRepository;
                 repository?.AddDevice(user, model.RegisterViewsModel.NameDevices, model.RegisterViewsModel.SerialNumber);
                 _unitOfWork.SaveChanges();
             }
@@ -49,7 +49,7 @@ namespace UpsConnectService.Controllers.Devices
             var user = await _userManager.FindByIdAsync(userId);           
             if (user != null)
             {
-                var repository = _unitOfWork.GetRepository<Device>() as DeviceRepository;
+                var repository = _unitOfWork.GetRepository<DeviceUsers>() as DeviceUsersRepository;
                 repository?.DeleteDevice(user, serialNumber);
                 _unitOfWork.SaveChanges();
 
@@ -63,9 +63,9 @@ namespace UpsConnectService.Controllers.Devices
             return NotFound();
         }
 
-        public List<Device> GetAllDevices(User user)
+        public List<DeviceUsers> GetAllDevices(User user)
         {
-            var repository = _unitOfWork.GetRepository<Device>() as DeviceRepository;
+            var repository = _unitOfWork.GetRepository<DeviceUsers>() as DeviceUsersRepository;
             return repository.getDeviceByUser(user);
         }
     }
