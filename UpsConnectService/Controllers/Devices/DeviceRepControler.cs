@@ -3,25 +3,26 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using SignalRChat.Hubs;
+using UpsConnectService.Data.Repositiry;
+using UpsConnectService.Data.UoW;
 using UpsConnectService.Models.Devices;
 
 namespace UpsConnectService.Controllers.Devices;
 
 public class DeviceRepControler: Controller
 {
-    IHubContext<DataHub> _hubContext;
-    private IValidator<DataDeviceRequest> _validator;
+    private readonly IHubContext<DataHub> _hubContext;
+    private readonly IValidator<DataDeviceRequest> _validator;
     private readonly ILogger<DeviceRepControler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeviceRepControler(IHubContext<DataHub> hubContext, IValidator<DataDeviceRequest> validator, ILogger<DeviceRepControler> logger)
+    public DeviceRepControler(IHubContext<DataHub> hubContext, IValidator<DataDeviceRequest> validator, ILogger<DeviceRepControler> logger, IUnitOfWork unitOfWork)
 	{
         _hubContext= hubContext;
         _validator= validator;
         _logger= logger;
+        _unitOfWork= unitOfWork;
 	}
-
-
-
 
 
     [HttpPost]
@@ -30,13 +31,18 @@ public class DeviceRepControler: Controller
     {
         ValidationResult result = await _validator.ValidateAsync(request);
 
-        if (result.IsValid) {
+        if (result.IsValid) 
+        {
+            //Record to DataBase
+            var repository = _unitOfWork.GetRepository<DataDeviceRequestExt>() as DeviceHistoryRepository;
+            repository?.AddDeviceToHistory(request);
+            _unitOfWork.SaveChanges();
 
             await _hubContext.Clients.All.SendAsync("ReceiveMessage", request);
-            return StatusCode(200, $"Данные получены");
-
+            return StatusCode(200, $"Is OK {request.SerialNumber}: {DateTime.Now:G}");
+             
         }
-        _logger.LogInformation($"Неверные данные от устройства {DateTime.Now:hh:mm:ss dd.MM.yyyy} \n" + result.ToString());
+        _logger.LogInformation($"Неверные данные от устройства {request.SerialNumber}: {DateTime.Now:G}" + result.ToString());
         return StatusCode(400);
     }
  }

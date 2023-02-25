@@ -5,9 +5,11 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpsConnectService", "UpsConnectService\UpsConnectService.csproj", "{B23094B3-5DBD-48A6-A7FD-43D0A3AB9A33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpsConnectService.Test", "UpsConnectService.Test\UpsConnectService.Test.csproj", "{D887446F-399B-4AE3-A1EB-B22BB600DF93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientUPS.WebSocket", "ClientUPS.WebSocket\ClientUPS.WebSocket.csproj", "{0417D53C-A330-414F-B935-DD7F004E1A3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientUPS", "ClientUPS\ClientUPS.csproj", "{A6FE2F7B-639E-43F6-A99D-71FEB7D39C56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientUPS.HttpPost", "ClientUPS.HttpPost\ClientUPS.HttpPost.csproj", "{186DDD13-9AE4-48DA-80F0-01F82F5F44B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientUPS.SignalIr", "ClientUPS.SignalIr\ClientUPS.SignalIr.csproj", "{3005092D-328A-4B8E-9F65-F84599323DE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		{B23094B3-5DBD-48A6-A7FD-43D0A3AB9A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B23094B3-5DBD-48A6-A7FD-43D0A3AB9A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B23094B3-5DBD-48A6-A7FD-43D0A3AB9A33}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D887446F-399B-4AE3-A1EB-B22BB600DF93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D887446F-399B-4AE3-A1EB-B22BB600DF93}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D887446F-399B-4AE3-A1EB-B22BB600DF93}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D887446F-399B-4AE3-A1EB-B22BB600DF93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A6FE2F7B-639E-43F6-A99D-71FEB7D39C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6FE2F7B-639E-43F6-A99D-71FEB7D39C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6FE2F7B-639E-43F6-A99D-71FEB7D39C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6FE2F7B-639E-43F6-A99D-71FEB7D39C56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0417D53C-A330-414F-B935-DD7F004E1A3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0417D53C-A330-414F-B935-DD7F004E1A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0417D53C-A330-414F-B935-DD7F004E1A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0417D53C-A330-414F-B935-DD7F004E1A3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{186DDD13-9AE4-48DA-80F0-01F82F5F44B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{186DDD13-9AE4-48DA-80F0-01F82F5F44B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{186DDD13-9AE4-48DA-80F0-01F82F5F44B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{186DDD13-9AE4-48DA-80F0-01F82F5F44B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3005092D-328A-4B8E-9F65-F84599323DE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3005092D-328A-4B8E-9F65-F84599323DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3005092D-328A-4B8E-9F65-F84599323DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3005092D-328A-4B8E-9F65-F84599323DE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

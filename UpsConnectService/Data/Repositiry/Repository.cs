@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-#nullable disable
-
 namespace UpsConnectService.Data.Repositiry
 {
     public class Repository<T> : IRepository<T> where T : class

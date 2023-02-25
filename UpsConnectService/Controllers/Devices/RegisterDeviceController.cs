@@ -31,7 +31,8 @@ namespace UpsConnectService.Controllers.Devices
             if (ModelState.IsValid)
             {
                 var repository = _unitOfWork.GetRepository<DeviceUsers>() as DeviceUsersRepository;
-                repository?.AddDevice(user, model.RegisterViewsModel.NameDevices, model.RegisterViewsModel.SerialNumber);
+                if (repository != null)
+                    repository.AddDevice(user, model.RegisterViewsModel.NameDevices, model.RegisterViewsModel.SerialNumber);
                 _unitOfWork.SaveChanges();
             }
             model = new UserPageViewModel
