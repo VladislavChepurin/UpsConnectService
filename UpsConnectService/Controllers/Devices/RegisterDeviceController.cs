@@ -26,13 +26,18 @@ namespace UpsConnectService.Controllers.Devices
         [HttpPost]
         public async Task<IActionResult> RegisterNewDevice(string userId, UserPageViewModel model)
         {
-            var user = await _userManager.FindByIdAsync(userId);    
-
+            var user = await _userManager.FindByIdAsync(userId);  
+                       
             if (ModelState.IsValid)
             {
-                var repository = _unitOfWork.GetRepository<DeviceUsers>() as DeviceUsersRepository;
-                if (repository != null)
-                    repository.AddDevice(user, model.RegisterViewsModel.NameDevices, model.RegisterViewsModel.SerialNumber);
+                var device = new DeviceUsers
+                {
+                    NameDevice = model.RegisterViewsModel.NameDevices,
+                    SerialNumber = model.RegisterViewsModel.SerialNumber,
+                };
+
+                if (_unitOfWork.GetRepository<DeviceUsers>() is DeviceUsersRepository repository)
+                    repository.UpdateOrCreateDevice(user, device);
                 _unitOfWork.SaveChanges();
             }
             model = new UserPageViewModel
@@ -64,10 +69,46 @@ namespace UpsConnectService.Controllers.Devices
             return NotFound();
         }
 
+        [Route("PutDevice")]
+        [HttpPost]
+        public async Task<IActionResult> PutDevice(DeviceUsers model)
+        {
+            var user = await _userManager.FindByIdAsync(model.UserId!);
+
+            if (ModelState.IsValid)
+            {
+                var repository = _unitOfWork.GetRepository<DeviceUsers>() as DeviceUsersRepository;
+                repository?.UpdateOrCreateDevice(user, model);
+                _unitOfWork.SaveChanges();
+
+                var viewModel = new UserPageViewModel
+                {
+                    UserViewModel = new UserViewModel(user)
+                    {
+                        LinkedDevices = GetAllDevices(user)
+                    }
+                };
+
+                return View("User", viewModel);
+            }
+
+            // Если что-то пошло не так, вернуть обратно с ошибками
+            var userForError = await _userManager.FindByIdAsync(model.UserId!);
+            var errorViewModel = new UserPageViewModel
+            {
+                UserViewModel = new UserViewModel(userForError)
+                {
+                    LinkedDevices = GetAllDevices(userForError)
+                }
+            };
+            return View("User", errorViewModel);
+        }
+
+
         public List<DeviceUsers> GetAllDevices(User user)
         {
             var repository = _unitOfWork.GetRepository<DeviceUsers>() as DeviceUsersRepository;
-            return repository.getDeviceByUser(user);
+            return repository!.getDeviceByUser(user);
         }
     }
 }

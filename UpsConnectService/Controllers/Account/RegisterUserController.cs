@@ -5,7 +5,7 @@ using UpsConnectService.Models.Users;
 using UpsConnectService.Repository;
 using UpsConnectService.ViewModels.Users;
 
-namespace AwesomeNetwork.Controllers.Account;
+namespace UpsConnectService.Controllers.Account;
 
 public class RegisterUserController : Controller
 {
@@ -13,7 +13,7 @@ public class RegisterUserController : Controller
     private readonly IMapper _mapper;
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
-    private readonly IRoleRepository _roleRepository;   
+    private readonly IRoleRepository _roleRepository;
 
     public RegisterUserController(ILogger<RegisterUserController> logger, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IRoleRepository roleRepository)
     {
@@ -37,12 +37,12 @@ public class RegisterUserController : Controller
     {
         if (ModelState.IsValid)
         {
-            var user = _mapper.Map<User>(model);           
+            var user = _mapper.Map<User>(model);
             var result = await _userManager.CreateAsync(user, model.PasswordReg);
             if (result.Succeeded)
             {
                 await _roleRepository.CreateInitRoles();
-                await _roleRepository.AssignRoles(user, model.CodeRegister ?? String.Empty);
+                await _roleRepository.AssignRoles(user, model.CodeRegister ?? string.Empty);
 
                 await _signInManager.SignInAsync(user, false);
                 _logger.LogInformation($"Зарегистрирован новый пользователь {user.UserName} ** {user.Email}");

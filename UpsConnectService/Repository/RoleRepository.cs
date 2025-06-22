@@ -11,12 +11,12 @@ namespace UpsConnectService.Repository
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<User> _userManager;
 
-        List<string> roles = new List<string>() {
+        private readonly List<string> roles = [
             "Administrator",
             "Operator",
             "User",
             "Outher"
-        };
+        ];
 
         public RoleRepository(ILogger<RoleRepository> logger, RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {

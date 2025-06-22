@@ -1,5 +1,6 @@
 ﻿using ClientUPS.SignalIr.Models;
 using Microsoft.AspNetCore.SignalR.Client;
+using System.Diagnostics;
 
 namespace ClientUPS.SignalIr.Services;
 
@@ -7,35 +8,52 @@ public class SignalIrClass
 {
     public HubConnection? connection;
 
-    public void InitSignalIr()
+    public async Task InitSignalIr()
     {
         connection = new HubConnectionBuilder()
               .WithUrl("http://localhost:5192/ChatHub")
-              .WithAutomaticReconnect()
+              .WithAutomaticReconnect(new[] { TimeSpan.Zero, TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(30) })
               .Build();
+
+        connection.Reconnecting += error =>
+        {
+            Console.WriteLine($"Reconect {DateTime.Now:G}");
+            return Task.CompletedTask;
+        };
+
+        connection.Reconnected += connectionId =>
+        {
+            Console.WriteLine($"Reconect is OK {DateTime.Now:G}");
+            return Task.CompletedTask;
+        };
 
         connection.Closed += async (error) =>
         {
-            await Task.Delay(new Random().Next(0, 5) * 1000);
-            await connection.StartAsync();
-        };       
-    }
+            await ConnectSignalIr(connection);
+        };
 
-    public async Task ConnectSignalIr()
-    {
         connection?.On<string>("ResponseMessage", param => {
             Console.WriteLine(param);
         });
 
-        try
-        {
-            if (connection != null)
-                await connection.StartAsync();
+        if(connection != null)
+            await ConnectSignalIr(connection);
+    }
 
-        }           
-        catch (Exception ex)
+    public static async Task ConnectSignalIr(HubConnection connection)
+    {
+        while (connection?.State != HubConnectionState.Connected)
         {
-            Console.WriteLine(ex.Message);
+            try
+            {
+                if (connection != null)
+                    await connection.StartAsync();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Disconect {DateTime.Now:G}");
+            }
+            Thread.Sleep(10000);
         }
     }
 

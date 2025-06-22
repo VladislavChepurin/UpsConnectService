@@ -2,19 +2,57 @@
     padding: 5px;
 }
 
-.enter_submit {
+.btn-enter-submit {
     border: none;
     color: white;
     background-color: #02b416;
     align-content: center;
-    font-size: 14px;
     padding: 10px;
     width: 100%;
     font-size: 15px;
+    transition: background-color 0.3s ease;
 }
 
-.container{
-    width:80%;
+    .btn-enter-submit:hover {
+        background-color: #018a11; /* Более темный оттенок зеленого */
+    }
+
+.btn-user-primary {
+    border: none;
+    color: white;
+    background-color: #02b416;
+    align-content: center;
+    padding: 6px;
+    width: 100%;
+    font-size: 13px;
+    width: 7em;
+    margin: 6px 4px 0px 0px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-user-primary:hover {
+        background-color: #018a11; /* Более темный оттенок зеленого */
+    }
+
+.btn-user-secondary {
+    border: none;
+    color: white;
+    background-color: #808080;
+    align-content: center;
+    padding: 6px;
+    width: 100%;
+    font-size: 13px;
+    width: 7em;
+    margin: 6px 4px 0px 0px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-user-secondary:hover {
+    background-color: #686868; /* Более темный оттенок зеленого */
+}
+
+.container {
+    width: 80%;
 }
 
 .center {

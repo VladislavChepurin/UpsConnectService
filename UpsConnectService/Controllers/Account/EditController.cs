@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using UpsConnectService.Data.Repositiry;
+using UpsConnectService.Data.UoW;
 using UpsConnectService.Extentions;
+using UpsConnectService.Models.Devices;
 using UpsConnectService.Models.Users;
 using UpsConnectService.ViewModels;
 using UpsConnectService.ViewModels.Users;
@@ -11,10 +14,12 @@ namespace UpsConnectService.Controllers.Account
     public class EditController : Controller
     {
         private readonly UserManager<User> _userManager;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public EditController(UserManager<User> userManager)
+        public EditController(UserManager<User> userManager, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
+            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -56,6 +61,8 @@ namespace UpsConnectService.Controllers.Account
                     {
                         UserViewModel = new UserViewModel(user)
                     };
+                    model.UserViewModel.LinkedDevices = GetAllDevices(user);
+
                     return View("User", model);
                 }
                 else
@@ -68,6 +75,12 @@ namespace UpsConnectService.Controllers.Account
                 ModelState.AddModelError("", "Некорректные данные");
                 return View("EditUser", userEdit);
             }
+        }
+
+        public List<DeviceUsers> GetAllDevices(User user)
+        {
+            var repository = _unitOfWork.GetRepository<DeviceUsers>() as DeviceUsersRepository;
+            return repository!.getDeviceByUser(user);
         }
     }
 }

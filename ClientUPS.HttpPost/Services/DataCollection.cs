@@ -14,7 +14,7 @@ public class DataCollection
         {
             var models = new DataDeviceRequest
             {
-                SerialNumber = "28-REP-2023",
+                SerialNumber = "0001_А1",
                 NameDevice = "РЭП-2000",
                 StatusCode = new Random().Next(1, 10),
                 InputVoltage = new Random().Next(150, 260),

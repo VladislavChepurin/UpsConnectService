@@ -4,8 +4,14 @@
     ViewData["Title"] = "Регистрация пользователя";
 }
 
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"
+        asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.min.js"
+        asp-fallback-test="window.jQuery && window.jQuery.validator">
+</script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"
+        asp-fallback-src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+        asp-fallback-test="window.jQuery && window.jQuery.validator && window.jQuery.validator.unobtrusive">
+</script>
 
 <div class="block-reg background-white">
     <h3 class="center">@ViewData["Title"]</h3>
@@ -54,7 +60,7 @@
             </div>
 
             <div class="center">
-                <input class="enter_submit" type="submit" value="Регистрация" />
+                <input class="btn-enter-submit" type="submit" value="Регистрация" />
             </div>
         </form>
     </div>
